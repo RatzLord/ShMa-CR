@@ -56,7 +56,7 @@ class Investors(db.Model):
 	__tablename__ = 'investors'
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(100), nullable=False)
+	name = db.Column(db.String(300), nullable=False)
 	password = db.Column(db.String)
 	stocks1 = db.Column(db.Integer, nullable=False, default=0)
 	stocks2 = db.Column(db.Integer, nullable=False, default=0)
@@ -360,7 +360,7 @@ def increase():
 	stock = Companies.query.filter_by(id=stock_id).first()
 
 	if checkbuy(stock_id,number_of_stocks,investor,stock):
-		investor.amount_left -= stock.current_price * number_of_stocks
+		investor.amount_left -= (stock.current_price * number_of_stocks +10)
 		purchase = Purchases(recipient_id=investor.id,stock_id=stock_id,amount=stock.current_price,number_of_stocks=number_of_stocks)
 		stock.shares_left -= number_of_stocks
 		stock.current_price += 0.12 * number_of_stocks
