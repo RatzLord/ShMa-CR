@@ -333,7 +333,7 @@ def decrease():
 	stock = Companies.query.filter_by(id=stock_id).first()
 
 	if checksell(stock_id,number_of_stocks,investor):
-		investor.amount_left += stock.current_price * number_of_stocks
+		investor.amount_left += (stock.current_price * (number_of_stocks*1.015))
 		sale = Sales(sender_id=investor.id,stock_id=stock_id,amount=stock.current_price,number_of_stocks=number_of_stocks)
 		stock.shares_left += number_of_stocks
 		stock.current_price -= 0.1* number_of_stocks 
@@ -360,7 +360,7 @@ def increase():
 	stock = Companies.query.filter_by(id=stock_id).first()
 
 	if checkbuy(stock_id,number_of_stocks,investor,stock):
-		investor.amount_left -= (stock.current_price * number_of_stocks +10)
+		investor.amount_left -= (stock.current_price * (number_of_stocks*1.015))
 		purchase = Purchases(recipient_id=investor.id,stock_id=stock_id,amount=stock.current_price,number_of_stocks=number_of_stocks)
 		stock.shares_left -= number_of_stocks
 		stock.current_price += 0.12 * number_of_stocks
