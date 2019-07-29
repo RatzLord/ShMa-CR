@@ -381,7 +381,7 @@ def admin_change():
 	if(session['name']=='admin'):
 		return render_template('admin_change.html', companies=Companies.query.all())
 	else:
-		return redirect(url_for('home'))
+		return render_template('admin_change.html', companies=Companies.query.all())
 
 @app.route('/admin_increase', methods=['POST'])
 def admin_increase():
