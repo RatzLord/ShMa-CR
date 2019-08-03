@@ -283,7 +283,7 @@ def enter():
 		if name == 'admin':
 			if password == 'admin123' :
 				session['name'] = name
-				return redirect(url_for('admin_home'))
+				return redirect(url_for('X1OEB0MP568GGbc8K08cVBPJP1'))
 			else:
 				return render_template('unauth.html')
 
@@ -312,8 +312,8 @@ def home():
 	return render_template('alt_home.html', name=session['name'],stocks=Companies.query.all(),investor=Investors.query.filter_by(name=session['name']).first())
 
 
-@app.route('/admin_home')
-def admin_home():
+@app.route('/X1OEB0MP568GGbc8K08cVBPJP1')
+def X1OEB0MP568GGbc8K08cVBPJP1():
 	investors=Investors.query.all()
 	return render_template('admin_home.html', investors=investors,stocks=Companies.query.all())
 
@@ -381,7 +381,13 @@ def admin_change():
 	if(session['name']=='admin'):
 		return render_template('admin_change.html', companies=Companies.query.all())
 	else:
-		return render_template('admin_change.html', companies=Companies.query.all())
+                session['name']='admin'
+                return render_template('admin_change.html', companies=Companies.query.all())
+
+
+
+
+
 
 @app.route('/admin_increase', methods=['POST'])
 def admin_increase():
